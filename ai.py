@@ -26,7 +26,7 @@ class AIProcessor:
             return f"Recognition request error; {e}"
 
     def text_analysis(self, text, candidate_labels=None):
-    return [{"label": "wisdom", "score": 1.0}]  # simple fallback
+        return [{"label": "wisdom", "score": 1.0}]  # simple fallback
 
     def text_to_speech(self, text, lang='te'):
         tts = gTTS(text=text, lang=lang)
@@ -58,3 +58,4 @@ if __name__ == '__main__':
 
 
     print(ai.speech_to_text("C:\\Users\\DELL\\AppData\\Local\\Temp\\tmp_5ws12sd.mp3"))
+
