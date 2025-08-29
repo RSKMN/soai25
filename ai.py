@@ -1,6 +1,6 @@
 import difflib
 import tempfile
-from transformers import pipeline
+# from transformers import pipeline
 import speech_recognition as sr
 from gtts import gTTS
 
@@ -9,7 +9,7 @@ class AIProcessor:
         # Initialize Speech Recognizer (uses Google Web API)
         self.recognizer = sr.Recognizer()
         # Initialize HuggingFace zero-shot classification for text analysis
-        self.classifier = pipeline('zero-shot-classification', model='facebook/bart-large-mnli')
+        # self.classifier = pipeline('zero-shot-classification', model='facebook/bart-large-mnli')
         # gTTS for Telugu text-to-speech
 
     def speech_to_text(self, audio_path):
@@ -26,12 +26,7 @@ class AIProcessor:
             return f"Recognition request error; {e}"
 
     def text_analysis(self, text, candidate_labels=None):
-        if candidate_labels is None:
-            candidate_labels = ['wisdom', 'life', 'humor', 'education', 'motivation',
-                                'child', 'region:Andhra Pradesh', 'region:Telangana', 'difficulty:easy',
-                                'difficulty:medium', 'difficulty:hard']
-        result = self.classifier(text, candidate_labels)
-        return [{"label": l, "score": s} for l, s in zip(result['labels'], result['scores']) if s > 0.1]
+    return [{"label": "wisdom", "score": 1.0}]  # simple fallback
 
     def text_to_speech(self, text, lang='te'):
         tts = gTTS(text=text, lang=lang)
@@ -60,5 +55,6 @@ if __name__ == '__main__':
 
     similarity = ai.compare_texts(proverb_text, "తెగిన వెన్న మీద ముసి దాలే లేదు")
     print('Similarity score:', similarity)
+
 
     print(ai.speech_to_text("C:\\Users\\DELL\\AppData\\Local\\Temp\\tmp_5ws12sd.mp3"))
